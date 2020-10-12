@@ -1,3 +1,0 @@
-/media/novice/ee793cfc-0f50-45b2-88be-958e7a685673/Project_folder/Face_Liveliness_Detection/faceDetection/build/CMakeFiles/rebuild_cache.dir
-/media/novice/ee793cfc-0f50-45b2-88be-958e7a685673/Project_folder/Face_Liveliness_Detection/faceDetection/build/CMakeFiles/edit_cache.dir
-/media/novice/ee793cfc-0f50-45b2-88be-958e7a685673/Project_folder/Face_Liveliness_Detection/faceDetection/build/CMakeFiles/facedetection.dir
