@@ -5,6 +5,10 @@
 #include <opencv2/highgui.hpp>
 #include <opencv2/dnn/dnn.hpp>
 
+#include <bits/stdc++.h> 
+#include <sys/stat.h> 
+#include <sys/types.h> 
+
 using namespace std;
 using namespace cv;
 using namespace cv::dnn;
@@ -13,5 +17,8 @@ class faceDetector
 {
 	public:
 		faceDetector();
-		void Detectfaces(Mat &frame, const string caffeConfigFile, const string caffeWeightFile);
+		Mat Detectfaces(Mat &frame, const string caffeConfigFile, const string caffeWeightFile);
+		void createDataSet(Mat &img, const string &path, int &cnt, int &userID);
+
+
 };

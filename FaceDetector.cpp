@@ -7,7 +7,7 @@ faceDetector::faceDetector()
 }
 
 
-void faceDetector::Detectfaces(Mat &frame, const string caffeConfigFile, const string caffeWeightFile)
+Mat faceDetector::Detectfaces(Mat &frame, const string caffeConfigFile, const string caffeWeightFile)
 {
 
 	float confidence_threshold = 0.5f;
@@ -49,6 +49,8 @@ void faceDetector::Detectfaces(Mat &frame, const string caffeConfigFile, const s
         vector<int> indices;
         NMSBoxes(boxes, confvect, confidence_threshold, nms_threshold, indices);
 
+        Rect roi;
+
         for (size_t i = 0; i < indices.size(); ++i)
         {
             int idx = indices[i];
@@ -56,8 +58,25 @@ void faceDetector::Detectfaces(Mat &frame, const string caffeConfigFile, const s
             rectangle(frame, cv::Point(box.x, box.y), cv::Point(box.x + box.width,box.y + box.height), Scalar(0, 255, 0), 3);
             namedWindow("FACE DETECTION USING DNN", WINDOW_NORMAL);
             imshow("FACE DETECTION USING DNN", frame);
+            
+            roi.x = box.x;
+            roi.y = box.y;
+            roi.width = box.width;
+            roi.height = box.height;
         }
         waitKey(1);
+
+        return frame(roi);
 }
 
+
+void faceDetector::createDataSet(Mat &img, const string &path, int &cnt, int &userID)
+{
+    string folderPath = path + "/" + to_string(userID);
+    char* folderPath_char = const_cast<char*>(folderPath.c_str());
+
+    mkdir(folderPath_char, 0777);
+    string name = folderPath + "/outputIMG_" + to_string(cnt) + ".png";
+    imwrite(name, img);
+}
 

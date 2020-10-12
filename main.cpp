@@ -14,16 +14,28 @@ int main()
 
 	VideoCapture cap("../video/sample.webm");
 	const string weight = "../model/res10_300x300_ssd_iter_140000.caffemodel";
-	const string  prototxt = "../model/deploy.prototxt";
+	const string prototxt = "../model/deploy.prototxt";
+	const string folderPath = "../OutputData";
+	int cnt = 0, userID;
+	cout<<"Enter user id :"<<endl;
+	cin>>userID;
 
-    cv::Mat frame;
+	char* OutputData_path = const_cast<char*>(folderPath.c_str());
+
+    mkdir(OutputData_path, 0777);
+
+    Mat frame;
 
     while(cap.grab())
     {
         
         cap.retrieve(frame);
 
-		fd.Detectfaces(frame, prototxt, weight);
+		Mat cropped_img = fd.Detectfaces(frame, prototxt, weight);
+
+		fd.createDataSet(cropped_img, folderPath, cnt, userID);
+
+		cnt++;
 	}
 }
 
